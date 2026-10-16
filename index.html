@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BBS // b4nd1t0.github.io</title>
+    <title>BBS // sixthfloor</title>
     <style>
         :root {
             --bg-color: #050a05;
@@ -32,7 +32,6 @@
             align-items: center;
             min-height: 100vh;
             transition: background 0.3s, color 0.3s;
-            /* Effetto scanline stile monitor CRT */
             background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, var(--scanline) 50%);
             background-size: 100% 4px;
         }
@@ -63,15 +62,23 @@
             letter-spacing: 2px;
         }
 
+        .sysop-info {
+            font-size: 0.8rem;
+            color: var(--term-dim);
+            margin-top: 4px;
+        }
+
         .theme-switch {
             background: transparent;
             border: 1px solid var(--term-color);
             color: var(--term-color);
-            padding: 5px 10px;
+            padding: 8px 12px;
             cursor: pointer;
             font-family: inherit;
             font-weight: bold;
             transition: all 0.2s;
+            text-transform: uppercase;
+            font-size: 0.85rem;
         }
 
         .theme-switch:hover {
@@ -119,6 +126,21 @@
             font-size: 0.8rem;
         }
 
+        /* Effetto cursore lampeggiante */
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            background-color: var(--term-color);
+            animation: blink 1s infinite;
+            vertical-align: bottom;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
         .cta-container {
             margin-top: 20px;
             text-align: center;
@@ -148,8 +170,11 @@
 
     <div class="wrapper">
         <header>
-            <h1>B4ND1T0 // BBS v1.0</h1>
-            <button class="theme-switch" onclick="toggleTheme()">[ CAMBIA COLORE ]</button>
+            <div>
+                <h1>SIXTHFLOOR // BBS</h1>
+                <div class="sysop-info">&gt; Sysop: b4nd1t0</div>
+            </div>
+            <button id="themeBtn" class="theme-switch" onclick="toggleTheme()">[ COLORE: VERDE ]</button>
         </header>
 
         <div class="grid-container">
@@ -159,13 +184,13 @@
                 <p class="dim">Ultime registrazioni di sistema:</p>
                 <ul>
                     <li><strong>[16.10]</strong> Online il nuovo hub di risorse.</li>
-                    <li><strong>[12.10]</strong> Aggiornati i pacchetti utility nel canale.</li>
+                    <li><strong>[12.10]</strong> Aggiornati i pacchetti utility.</li>
                     <li><strong>[05.10]</strong> Ottimizzazione script e repository.</li>
                 </ul>
-                <p class="dim" style="margin-top: 20px;">Stato server: OPERATIVO [OK]</p>
+                <p class="dim" style="margin-top: 20px;">Stato server: OPERATIVO [OK]<span class="cursor">&nbsp;</span></p>
             </div>
 
-            <!-- COLONNA 2: Sezioni Canale Telegram / File -->
+            <!-- COLONNA 2: Sezioni Gruppo Telegram / File -->
             <div class="panel">
                 <h2>&gt; TELEGRAM_INDEX</h2>
                 <p class="dim">Indice categorie disponibili:</p>
@@ -179,15 +204,22 @@
         </div>
 
         <div class="cta-container">
-            <p class="dim">Accesso diretto al canale ufficiale:</p>
-            <a href="https://t.me/+d5RUeZRhxjVjZGFk" class="btn-telegram" target="_blank">&gt; RICHIEDI L'ACCESSO AL CANALE TELEGRAM &lt;</a>
+            <p class="dim">Accesso diretto al gruppo ufficiale:</p>
+            <a href="https://t.me/+d5RUeZRhxjVjZGFk" class="btn-telegram" target="_blank">&gt; UNISCITI AL GRUPPO TELEGRAM &lt;</a>
         </div>
     </div>
 
     <script>
         function toggleTheme() {
             const body = document.body;
+            const btn = document.getElementById('themeBtn');
             body.classList.toggle('amber');
+            
+            if (body.classList.contains('amber')) {
+                btn.innerText = '[ COLORE: AMBRA ]';
+            } else {
+                btn.innerText = '[ COLORE: VERDE ]';
+            }
         }
     </script>
 
