@@ -11,6 +11,7 @@
             --term-dim: #00aa44;
             --term-border: #00ff6655;
             --scanline: rgba(0, 255, 102, 0.03);
+            --alert-color: #ff3333;
         }
 
         body.amber {
@@ -19,6 +20,7 @@
             --term-dim: #aa7700;
             --term-border: #ffb00055;
             --scanline: rgba(255, 176, 0, 0.03);
+            --alert-color: #ffaa00;
         }
 
         body {
@@ -90,6 +92,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
+            margin-bottom: 20px;
         }
 
         @media (max-width: 768px) {
@@ -126,6 +129,47 @@
             font-size: 0.8rem;
         }
 
+        /* Pannello di stato live / trasmissioni */
+        .live-panel {
+            border: 1px solid var(--term-border);
+            padding: 15px;
+            margin-bottom: 20px;
+            background: rgba(0, 255, 102, 0.02);
+        }
+
+        .status-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .status-badge {
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 2px 6px;
+            border: 1px solid var(--term-dim);
+            color: var(--term-dim);
+        }
+
+        .status-badge.offline {
+            color: var(--term-dim);
+            border-color: var(--term-dim);
+        }
+
+        .links-row {
+            margin-top: 10px;
+            font-size: 0.8rem;
+        }
+
+        .links-row a {
+            color: var(--term-color);
+            text-decoration: underline;
+            margin-right: 15px;
+        }
+
         /* Effetto cursore lampeggiante */
         .cursor {
             display: inline-block;
@@ -142,7 +186,6 @@
         }
 
         .cta-container {
-            margin-top: 20px;
             text-align: center;
             border-top: 1px dashed var(--term-border);
             padding-top: 20px;
@@ -200,6 +243,21 @@
                     <li><strong>⚙️ Retrocomputing:</strong> Appunti, rom e curiosità vintage.</li>
                     <li><strong>💬 Discussioni:</strong> Approfondimenti dedicati.</li>
                 </ul>
+            </div>
+        </div>
+
+        <!-- NUOVO PANNELLO: Stato Trasmissioni / Canali -->
+        <div class="live-panel">
+            <h2>&gt; BROADCAST_MONITOR</h2>
+            <div class="status-line">
+                <span>Stato attuale canali:</span>
+                <span class="status-badge offline" id="statusBadge">[ IN ATTESA DI SEGNALE ]</span>
+            </div>
+            <div class="links-row">
+                <span class="dim">Piattaforme di riferimento:</span> 
+                <a href="https://www.twitch.tv/b4nd1to" target="_blank">Twitch</a> 
+                <a href="https://www.youtube.com/@lssprtt" target="_blank">YouTube</a> 
+                <a href="https://t.me/+d5RUeZRhxjVjZGFk" target="_blank">Gruppo Telegram</a>
             </div>
         </div>
 
