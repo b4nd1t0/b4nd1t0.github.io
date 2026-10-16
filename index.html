@@ -3,87 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Il Mio Spazio Personale</title>
+    <title>BBS // b4nd1t0.github.io</title>
     <style>
+        :root {
+            --bg-color: #050a05;
+            --term-color: #00ff66;
+            --term-dim: #00aa44;
+            --term-border: #00ff6655;
+            --scanline: rgba(0, 255, 102, 0.03);
+        }
+
+        body.amber {
+            --bg-color: #0a0700;
+            --term-color: #ffb000;
+            --term-dim: #aa7700;
+            --term-border: #ffb00055;
+            --scanline: rgba(255, 176, 0, 0.03);
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
+            background-color: var(--bg-color);
+            color: var(--term-color);
+            font-family: "Courier New", Courier, monospace;
             margin: 0;
-            padding: 0;
+            padding: 20px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
+            /* Effetto scanline stile monitor CRT */
+            background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, var(--scanline) 50%);
+            background-size: 100% 4px;
         }
-        .container {
-            max-width: 600px;
+
+        .wrapper {
+            max-width: 900px;
             width: 100%;
-            background: #1e1e1e;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-            text-align: center;
+            border: 1px solid var(--term-border);
+            padding: 20px;
+            box-shadow: 0 0 15px var(--term-border);
+            background: rgba(0, 0, 0, 0.4);
             box-sizing: border-box;
-            margin: 20px;
         }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed var(--term-border);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
         h1 {
-            color: #ffffff;
-            margin-bottom: 10px;
-        }
-        p {
-            color: #b0b0b0;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-        .stats-box {
-            background: #2a2a2a;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 30px;
-            text-align: left;
-        }
-        .stats-box h3 {
-            margin-top: 0;
-            color: #4CAF50;
-            font-size: 1.1em;
-        }
-        .stats-box ul {
+            font-size: 1.4rem;
             margin: 0;
-            padding-left: 20px;
-            color: #cccccc;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
-        .btn {
+
+        .theme-switch {
+            background: transparent;
+            border: 1px solid var(--term-color);
+            color: var(--term-color);
+            padding: 5px 10px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .theme-switch:hover {
+            background: var(--term-color);
+            color: var(--bg-color);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            border: 1px dashed var(--term-border);
+            padding: 15px;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            margin-top: 0;
+            border-bottom: 1px solid var(--term-border);
+            padding-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        ul {
+            padding-left: 15px;
+            margin: 10px 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .dim {
+            color: var(--term-dim);
+            font-size: 0.8rem;
+        }
+
+        .cta-container {
+            margin-top: 20px;
+            text-align: center;
+            border-top: 1px dashed var(--term-border);
+            padding-top: 20px;
+        }
+
+        .btn-telegram {
             display: inline-block;
-            background-color: #229ED9;
-            color: white;
-            padding: 14px 28px;
-            border-radius: 30px;
+            border: 1px solid var(--term-color);
+            color: var(--term-color);
+            padding: 10px 20px;
             text-decoration: none;
             font-weight: bold;
-            transition: background 0.2s;
+            text-transform: uppercase;
+            transition: all 0.2s;
         }
-        .btn:hover {
-            background-color: #1b85ba;
+
+        .btn-telegram:hover {
+            background: var(--term-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 10px var(--term-color);
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Benvenuto</h1>
-        <p>Uno spazio essenziale e pulito dedicato ai miei argomenti di interesse, alle risorse e agli aggiornamenti costanti.</p>
-        
-        <div class="stats-box">
-            <h3>📊 Stato Risorse & Canale</h3>
-            <ul>
-                <li>Ultimo aggiornamento: <strong>Oggi</strong></li>
-                <li>File e utility disponibili: <strong>Attivi</strong></li>
-            </ul>
+    <div class="wrapper">
+        <header>
+            <h1>B4ND1T0 // BBS v1.0</h1>
+            <button class="theme-switch" onclick="toggleTheme()">[ CAMBIA COLORE ]</button>
+        </header>
+
+        <div class="grid-container">
+            <!-- COLONNA 1: Stile BBS / Novità -->
+            <div class="panel">
+                <h2>&gt; BOARD_NEWS</h2>
+                <p class="dim">Ultime registrazioni di sistema:</p>
+                <ul>
+                    <li><strong>[16.10]</strong> Online il nuovo hub di risorse.</li>
+                    <li><strong>[12.10]</strong> Aggiornati i pacchetti utility nel canale.</li>
+                    <li><strong>[05.10]</strong> Ottimizzazione script e repository.</li>
+                </ul>
+                <p class="dim" style="margin-top: 20px;">Stato server: OPERATIVO [OK]</p>
+            </div>
+
+            <!-- COLONNA 2: Sezioni Canale Telegram / File -->
+            <div class="panel">
+                <h2>&gt; TELEGRAM_INDEX</h2>
+                <p class="dim">Indice categorie disponibili:</p>
+                <ul>
+                    <li><strong>📁 Tech & Utility:</strong> Script, guide e tool rapidi.</li>
+                    <li><strong>💾 Archivio File:</strong> Raccolta software e utility verificate.</li>
+                    <li><strong>⚙️ Retrocomputing:</strong> Appunti, rom e curiosità vintage.</li>
+                    <li><strong>💬 Discussioni:</strong> Approfondimenti dedicati.</li>
+                </ul>
+            </div>
         </div>
 
-        <a href="https://t.me/+d5RUeZRhxjVjZGFk" class="btn" target="_blank">Unisciti al Canale Telegram</a>
+        <div class="cta-container">
+            <p class="dim">Accesso diretto al canale ufficiale:</p>
+            <a href="https://t.me/+d5RUeZRhxjVjZGFk" class="btn-telegram" target="_blank">&gt; RICHIEDI L'ACCESSO AL CANALE TELEGRAM &lt;</a>
+        </div>
     </div>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            body.classList.toggle('amber');
+        }
+    </script>
 
 </body>
 </html>
